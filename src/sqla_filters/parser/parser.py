@@ -26,13 +26,28 @@ def validate_element(e_type, e_value) -> bool:
 
 
 class JSONFiltersParser(object):
-    def __init__(self, json_str: str) -> None:
+    def __init__(self, json_str: str, attr_sep: str = '.') -> None:
         self._raw_data = json_str
+        self._attr_sep = attr_sep  # Global attr_sep
         self._filters_tree = self._generate_filters_tree()
 
     @property
     def raw_data(self) -> str:
         return self._raw_data
+
+    @property
+    def attr_sep(self) -> str:
+        """Return the current attriute separator."""
+        return self._attr_sep
+
+    @attr_sep.setter
+    def attr_sep(self, new_sep: str) -> None:
+        """Set the new value for the attribute separator.
+        
+        When the new value is assigned a new tree is generated.
+        """
+        self._attr_sep = new_sep
+        self._filters_tree = self._generate_filters_tree()
 
     @property
     def tree(self) -> SqlaFilterTree:
@@ -44,9 +59,11 @@ class JSONFiltersParser(object):
             return LOGICAL_NODES[key]()
         elif key == 'operator':
             operator = data.get('operator')
+            attr_sep = data.get('attr_sep', None)  # Per node attr_sep
             return OPERATOR_NODES[operator](
                 data.get('attribute', ''),
                 data.get('value', None),
+                attr_sep=attr_sep if attr_sep else self._attr_sep
             )
         else:
             raise FiltersParserTypeError('Unknown key.')
