@@ -134,8 +134,7 @@ class TestNull(object):
                     "type": "operator", \
                     "data": { \
                         "attribute": "average", \
-                        "operator": "null", \
-                        "value": null \
+                        "operator": "null" \
                     } \
                 } \
             ] \
@@ -156,8 +155,7 @@ class TestNull(object):
                     "type": "operator", \
                     "data": { \
                         "attribute": "average", \
-                        "operator": "not_null", \
-                        "value": "" \
+                        "operator": "not_null" \
                     } \
                 } \
             ] \
@@ -469,3 +467,37 @@ class TestIn(object):
         assert results[0].content == 'content_2'
         assert results[1].title == 'post_5'
         assert results[1].content == 'content_5'
+
+
+class TestContains(object):
+    def setup_class(self):
+        self._engine = sa.create_engine('sqlite:///test.db')
+        self._DBSession = sessionmaker(bind=self._engine)
+        self._session = self._DBSession()
+
+    def teardown_class(self):
+        self._session.close()
+
+    def test_1_contains(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "name", \
+                        "operator": "contains", \
+                        "value": "to" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Simple)
+        results = parser.tree.filter(query).all()
+        print(results)
+        assert len(results) == 1
+        assert results[0].name == 'Toto'
+        assert results[0].age == 20
+        assert results[0].average == 10

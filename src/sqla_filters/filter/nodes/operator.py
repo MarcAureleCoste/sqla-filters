@@ -197,7 +197,6 @@ class ContainsNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(ContainsNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.contains
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -205,7 +204,7 @@ class ContainsNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr).contains(self._value)
             )
 
     def __str__(self) -> str:
