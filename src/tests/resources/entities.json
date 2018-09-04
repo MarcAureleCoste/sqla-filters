@@ -16,11 +16,41 @@
         {"author_name": "author_3"}
     ],
     "post": [
-        {"title": "post_1", "content": "content_1", "pages": "2"},
-        {"title": "post_2", "content": "content_2", "pages": "5"},
-        {"title": "post_3", "content": "content_3", "pages": "3"},
-        {"title": "post_4", "content": "content_4", "pages": "7"},
-        {"title": "post_5", "content": "content_5", "pages": "4"},
-        {"title": "post_6", "content": "content_6", "pages": "10"}
+        {
+            "title": "post_1",
+            "content": "content_1",
+            "pages": "2",
+            "pub_date": "01-01-2018"
+        },
+        {
+            "title": "post_2",
+            "content": "content_2",
+            "pages": "5",
+            "pub_date": "01-02-2018"
+        },
+        {
+            "title": "post_3",
+            "content": "content_3",
+            "pages": "3",
+            "pub_date": "01-03-2018"
+        },
+        {
+            "title": "post_4",
+            "content": "content_4",
+            "pages": "7",
+            "pub_date": "01-04-2018"
+        },
+        {
+            "title": "post_5",
+            "content": "content_5",
+            "pages": "4",
+            "pub_date": "01-05-2018"
+        },
+        {
+            "title": "post_6",
+            "content": "content_6",
+            "pages": "10",
+            "pub_date": "01-06-2018"
+        }
     ]
 }

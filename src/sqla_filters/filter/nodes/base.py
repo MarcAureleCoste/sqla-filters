@@ -3,6 +3,7 @@
 These class are used to represent the filters to apply to a query.
 """
 import abc
+import datetime
 from typing import (
     Any,
     List,
@@ -12,7 +13,11 @@ from typing import (
     Iterator,
     Callable
 )
-
+from sqlalchemy import (
+    Date,
+    Time,
+    DateTime
+)
 from sqlalchemy import or_
 from sqlalchemy.orm.query import Query
 
@@ -32,11 +37,22 @@ class TreeNode(metaclass=abc.ABCMeta):
 
 
 class BaseOperatorNode(TreeNode):
-    def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+    def __init__(
+        self, 
+        attribute: str, 
+        value: Any, 
+        attr_sep: str='.',
+        # date_format: str='%Y-%m-%d',
+        # time_format: str='%H:%M:%S',
+        # datetime_format: str='%Y-%m-%d %H:%M:%S.%f'
+    ) -> None:
         super(BaseOperatorNode, self).__init__()
         self._attribute = attribute
         self._value = value
         self._attr_sep = attr_sep
+        # self._date_format = date_format
+        # self._time_format = time_format
+        # self._datetime_format = datetime_format
 
     @property
     def attribute(self) -> str:
@@ -73,6 +89,21 @@ class BaseOperatorNode(TreeNode):
                     # /!\ join return a new query /!\
                     joined_query = joined_query.join(j_model)
         return joined_query
+
+    # def _value_to_date(self, value: str) -> datetime.datetime:
+    #     return datetime.datetime.strptime(value, self._date_format)
+
+    # def _value_to_time(self, value: str) -> datetime.datetime:
+    #     return datetime.datetime.strptime(value, self._time_format)
+
+    # def _value_to_datetime(self, value: str) -> datetime.datetime:
+    #     return datetime.datetime.strptime(value, self._time_format)
+
+    # def _get_field_value(self, field, value):
+    #     f_type = field.property.columns[0].type  # Get field type
+    #     if isinstance(f_type, DateTime) or isinstance(f_type, Date) or isinstance(f_type, Time):
+    #         return self._value_to_date(value)
+    #     return value
 
     def filter(self, query: Query, entity: type):
         raise NotImplementedError('You must implement this.')

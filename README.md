@@ -38,7 +38,7 @@ The following operators are or will be implemented:
 
 | support | operators |          name         |        code        |
 |:-------:|:----------|:---------------------:|-------------------:|
-|   [ ]   | like      | like                  | like()             |
+|   [x]   | like      | like                  | like()             |
 |   [x]   | eq        | equal                 | operators.eq       |
 |   [x]   | not_eq    | not equal             | operators.ne       |
 |   [x]   | null      | null                  | is None            |
@@ -49,7 +49,7 @@ The following operators are or will be implemented:
 |   [x]   | lte       | lower than or equal   | operators.le       |
 |   [x]   | in        | in                    | in_()              |
 |   [x]   | not_in    | not in                | ~.in_()            |
-|   [ ]   | contains  | contains              | operators.contains |
+|   [x]   | contains  | contains              | operators.contains |
 
 ## Formats
 

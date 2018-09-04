@@ -501,3 +501,181 @@ class TestContains(object):
         assert results[0].name == 'Toto'
         assert results[0].age == 20
         assert results[0].average == 10
+
+
+class TestLike(object):
+    def setup_class(self):
+        self._engine = sa.create_engine('sqlite:///test.db')
+        self._DBSession = sessionmaker(bind=self._engine)
+        self._session = self._DBSession()
+
+    def teardown_class(self):
+        self._session.close()
+
+    def test_1_like(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "name", \
+                        "operator": "like", \
+                        "value": "Pers%" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Person)
+        results = parser.tree.filter(query).all()
+        assert len(results) == 3
+
+    def test_2_like(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "name", \
+                        "operator": "like", \
+                        "value": "%_1" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Person)
+        result = parser.tree.filter(query).all()
+        assert len(result) == 1
+
+    def test_3_like(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "name", \
+                        "operator": "like", \
+                        "value": "%son_%" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Person)
+        result = parser.tree.filter(query).all()
+        assert len(result) == 3
+
+
+class TestDatetime(object):
+    def setup_class(self):
+        self._engine = sa.create_engine('sqlite:///test.db')
+        self._DBSession = sessionmaker(bind=self._engine)
+        self._session = self._DBSession()
+
+    def teardown_class(self):
+        self._session.close()
+
+    def test_1_datetime(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "pub_date", \
+                        "operator": "gt", \
+                        "value": "2018-04-01 10:45:23" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Post)
+        results = parser.tree.filter(query).all()
+        assert len(results) == 2
+        assert results[0].title == 'post_5'
+        assert results[1].title == 'post_6'
+
+    def test_2_date(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "posts.pub_date", \
+                        "operator": "gt", \
+                        "value": "2018-05-01 10:45:23" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Author)
+        results = parser.tree.filter(query).all()
+        assert len(results) == 1
+        assert results[0].author_name == 'author_3'
+
+
+class TestDate(object):
+    def setup_class(self):
+        self._engine = sa.create_engine('sqlite:///test.db')
+        self._DBSession = sessionmaker(bind=self._engine)
+        self._session = self._DBSession()
+
+    def teardown_class(self):
+        self._session.close()
+
+    def test_1_date(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "pub_date", \
+                        "operator": "gt", \
+                        "value": "2018-04-01" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Post)
+        results = parser.tree.filter(query).all()
+        assert len(results) == 3
+        assert results[0].title == 'post_4'
+        assert results[1].title == 'post_5'
+        assert results[2].title == 'post_6'
+
+    def test_2_date(self):
+        data = '{ \
+            "type": "and", \
+            "data": [ \
+                { \
+                    "type": "operator", \
+                    "data": { \
+                        "attribute": "posts.pub_date", \
+                        "operator": "gt", \
+                        "value": "2018-05-01" \
+                    } \
+                } \
+            ] \
+        }'
+        parser = JSONFiltersParser(data)
+        query = self._session \
+            .query(Author)
+        results = parser.tree.filter(query).all()
+        assert len(results) == 2
+        assert results[0].author_name == 'author_2'
+        assert results[1].author_name == 'author_3'
