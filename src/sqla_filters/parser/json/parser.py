@@ -6,7 +6,8 @@ from abc import (
 )
 from typing import Any
 
-from ..filter import (
+# from ..filter import (
+from sqla_filters.filter import (
     TreeNode,
     OrNode,
     AndNode,
@@ -15,6 +16,7 @@ from ..filter import (
     LOGICAL_NODES
 )
 from .exceptions import FiltersParserTypeError
+from sqla_filters.parser.base import BaseSqlaParser
 
 
 def validate_element(e_type, e_value) -> bool:
@@ -25,33 +27,9 @@ def validate_element(e_type, e_value) -> bool:
     return True
 
 
-class JSONFiltersParser(object):
+class JSONFiltersParser(BaseSqlaParser):
     def __init__(self, json_str: str, attr_sep: str = '.') -> None:
-        self._raw_data = json_str
-        self._attr_sep = attr_sep  # Global attr_sep
-        self._filters_tree = self._generate_filters_tree()
-
-    @property
-    def raw_data(self) -> str:
-        return self._raw_data
-
-    @property
-    def attr_sep(self) -> str:
-        """Return the current attriute separator."""
-        return self._attr_sep
-
-    @attr_sep.setter
-    def attr_sep(self, new_sep: str) -> None:
-        """Set the new value for the attribute separator.
-        
-        When the new value is assigned a new tree is generated.
-        """
-        self._attr_sep = new_sep
-        self._filters_tree = self._generate_filters_tree()
-
-    @property
-    def tree(self) -> SqlaFilterTree:
-        return self._filters_tree
+        super(JSONFiltersParser, self).__init__(json_str, attr_sep)
 
     def _create_node(self, key: str, data: Any) -> TreeNode:
         # TODO: Correct the mypy error
