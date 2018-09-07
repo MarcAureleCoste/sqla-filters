@@ -1,4 +1,4 @@
-from sqla_filters.parser import JSONFiltersParser
+from sqla_filters.parser.json import JSONFiltersParser
 from sqla_filters.filter import (
     AndNode,
     EqNode

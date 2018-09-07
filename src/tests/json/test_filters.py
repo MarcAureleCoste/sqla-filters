@@ -3,7 +3,7 @@ import os
 import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker
 
-from sqla_filters.parser import JSONFiltersParser
+from sqla_filters.parser.json import JSONFiltersParser
 
 from ..db import Base
 from ..loader import load_models
