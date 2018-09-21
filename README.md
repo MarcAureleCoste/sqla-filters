@@ -125,3 +125,16 @@ The following operators are or will be implemented:
 Fork the repository and run the following command to install the dependencies and the dev dependencies.
 
 `pip install -e '.[dev]'`
+
+
+### URLS
+[github discution](https://github.com/pypa/pip/issues/3)
+
+[md table](https://github.com/pypa/sample-namespace-packages/blob/master/table.md)
+
+Tree way to package python application with namespace
+ - pkg_ressource (old, almost deprecated)
+ - pkgutils
+ - pep420
+
+Top level folder must be a namespace.

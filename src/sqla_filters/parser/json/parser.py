@@ -1,12 +1,6 @@
 import json
-import ast
-from abc import (
-    ABC,
-    abstractmethod
-)
 from typing import Any
 
-# from ..filter import (
 from sqla_filters.filter import (
     TreeNode,
     OrNode,
@@ -15,8 +9,8 @@ from sqla_filters.filter import (
     OPERATOR_NODES,
     LOGICAL_NODES
 )
-from .exceptions import FiltersParserTypeError
 from sqla_filters.parser.base import BaseSqlaParser
+from .exceptions import JSONFiltersParserTypeError
 
 
 def validate_element(e_type, e_value) -> bool:
@@ -44,7 +38,7 @@ class JSONFiltersParser(BaseSqlaParser):
                 attr_sep=attr_sep if attr_sep else self._attr_sep
             )
         else:
-            raise FiltersParserTypeError('Unknown key.')
+            raise JSONFiltersParserTypeError('Unknown key.')
 
     def _generate_nodes(self, key: str, data: Any) -> TreeNode:
         node = self._create_node(key, data)
@@ -60,5 +54,5 @@ class JSONFiltersParser(BaseSqlaParser):
         r_type = json_dict.get('type', None)
         r_data = json_dict.get('data', None)
         if not validate_element(r_type, r_data):
-            raise FiltersParserTypeError('Invalid json')
+            raise JSONFiltersParserTypeError('Invalid json')
         return SqlaFilterTree(self._generate_nodes(r_type, r_data))
