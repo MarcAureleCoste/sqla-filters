@@ -8,6 +8,13 @@ from .nodes import TreeNode
 
 
 class SqlaFilterTree(object):
+    """Class SqlaFilterTree.
+    
+    When you acces the parser.tree an instance of the class is returned.
+    From the class you can access the root element and filter a sqlalchemy
+    query.
+    """
+
     def __init__(self, root: TreeNode) -> None:
         self._root = root
 

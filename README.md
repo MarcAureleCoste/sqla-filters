@@ -1,16 +1,22 @@
-# Introduction 
+# Sqla-filters
+
+![license](https://img.shields.io/pypi/l/sqla-filters.svg)
+![wheel](https://img.shields.io/pypi/wheel/sqla-filters.svg)
+![pyversions](https://img.shields.io/pypi/pyversions/sqla-filters.svg)
+
+## Introduction 
 
 Filter sqlalchemy query with json data.
 
 This is an early stage version of the project a lot of change is coming.
 
-# Installation
+## Installation
 
 ```bash
 pip install sqla-filter
 ```
 
-# Getting Started
+## Getting Started
 
 Create an instance of the JSONFilterParser with the json string.
 
@@ -32,7 +38,7 @@ filtered_query = parser.tree.filter(query)
 query.all()
 ```
 
-## Operators
+### Operators
 
 The following operators are or will be implemented:
 
@@ -51,9 +57,9 @@ The following operators are or will be implemented:
 |   [x]   | not_in    | not in                | ~.in_()            |
 |   [x]   | contains  | contains              | operators.contains |
 
-## Formats
+### Formats
 
-### JSON
+#### JSON
 
 ```json
 {
@@ -94,7 +100,7 @@ The following operators are or will be implemented:
 
 /!\ Json format can change in the futur. /!\
 
-### Tree result
+#### Tree result
 
 ```
                                       +----------------------+
@@ -120,7 +126,7 @@ The following operators are or will be implemented:
 +----------------------+                +----------------------+
 ```
 
-# Contribute
+## Contribute
 
 Fork the repository and run the following command to install the dependencies and the dev dependencies.
 
