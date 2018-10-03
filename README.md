@@ -16,29 +16,7 @@ This is an early stage version of the project a lot of change is coming.
 pip install sqla-filter
 ```
 
-## Getting Started
-
-Create an instance of the JSONFilterParser with the json string.
-
-Example:
-```python
-# Sqlalchemy setup ... + model definition
-
-# Create a JSON parser instance
-parser = JSONFiltersParser(raw_json_string)
-
-# you now have a tree available as a property in the parser
-print(parser.tree)
-
-# You can finaly filter your query
-query = session.query(Post)
-filtered_query = parser.tree.filter(query)
-
-# Get the results
-query.all()
-```
-
-### Operators
+## Operators
 
 The following operators are or will be implemented:
 
@@ -57,50 +35,8 @@ The following operators are or will be implemented:
 |   [x]   | not_in    | not in                | ~.in_()            |
 |   [x]   | contains  | contains              | operators.contains |
 
-### Formats
 
-#### JSON
-
-```json
-{
-    "type": "and",
-    "data": [
-        {
-            "type": "or",
-            "data": [
-                {
-                    "type": "operator",
-                    "data": {
-                        "attribute": "name",
-                        "operator": "eq",
-                        "value": "toto"
-                    }
-                },
-                {
-                    "type": "operator",
-                    "data":{
-                        "attribute": "name",
-                        "operator": "eq",
-                        "value": "tata"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "operator",
-            "data": {
-                "attribute": "age",
-                "operator": "eq",
-                "value": 21
-            }
-        }
-    ]
-}
-```
-
-/!\ Json format can change in the futur. /!\
-
-#### Tree result
+## Tree
 
 ```
                                       +----------------------+
@@ -135,12 +71,3 @@ Fork the repository and run the following command to install the dependencies an
 
 ### URLS
 [github discution](https://github.com/pypa/pip/issues/3)
-
-[md table](https://github.com/pypa/sample-namespace-packages/blob/master/table.md)
-
-Tree way to package python application with namespace
- - pkg_ressource (old, almost deprecated)
- - pkgutils
- - pep420
-
-Top level folder must be a namespace.
