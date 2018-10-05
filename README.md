@@ -6,9 +6,14 @@
 
 ## Introduction 
 
-Filter sqlalchemy query with json data.
+The purpose of this project is to set the basic class so that you can create a tree that will be then used to filter a request made with the SQLAlchemy ORM.
 
-This is an early stage version of the project a lot of change is coming.
+Currently, the elements provided are as Follows:
+- the nodes (see: the table Below)
+- the class SqlaFilterTree which contains the tree and allows to print it.
+- the class BaseSqlaParser which serves as the basis if you create a parser that allows generating a tree.
+
+This project is also for me a way to experience the namespace packages.
 
 ## Installation
 
@@ -38,6 +43,8 @@ The following operators are or will be implemented:
 
 ## Tree
 
+This is an example of what a tree looks like.
+
 ```
                                       +----------------------+
                                       |                      |
@@ -64,10 +71,29 @@ The following operators are or will be implemented:
 
 ## Contribute
 
+You can contribute to the project using different ways.
+
+### 1 | Classical
+
 Fork the repository and run the following command to install the dependencies and the dev dependencies.
 
 `pip install -e '.[dev]'`
 
+Pipenv `Pipefile` is also available if needed.
 
-### URLS
-[github discution](https://github.com/pypa/pip/issues/3)
+### 2 | Using namespace features
+
+If you want to contribute using the namespace features it's really simple.
+First create your own project and use the following directories structure.
+
+    ProjectFolder
+        |______src
+                |______sqla_filters
+                            |______parser
+
+This is an example to create new parser.
+
+You can find example with the following repositories:
+
+- [sqla-filters-json](https://github.com/MarcAureleCoste/sqla-filters-json)
+- [sqla-filters-yaml](https://github.com/MarcAureleCoste/sqla-filters-yaml)

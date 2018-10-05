@@ -11,8 +11,8 @@ Currently two logical operation are supported:
 from sqlalchemy import and_, or_
 from sqlalchemy.orm.query import Query
 
-from .base import BaseLogicalNode
-
+# from .base import BaseLogicalNode
+from sqla_filters.nodes.base import BaseLogicalNode
 
 class AndNode(BaseLogicalNode):
     """Represent the ``and`` operation from sqlalchemy.
@@ -22,8 +22,7 @@ class AndNode(BaseLogicalNode):
     """
 
     def __init__(self) -> None:
-        super(AndNode, self).__init__()
-        self._method = and_
+        super(AndNode, self).__init__(method=and_)
 
     def __str__(self) -> str:
         return '<AND node : {}>'.format(id(self))
@@ -36,7 +35,7 @@ class OrNode(BaseLogicalNode):
     to create the filters list and apply the ``or_`` function to this list."""
 
     def __init__(self) -> None:
-        super(OrNode, self).__init__()
+        super(OrNode, self).__init__(method=or_)
 
     def __str__(self) -> str:
         return '<OR node : {}>'.format(id(self))

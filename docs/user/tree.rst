@@ -11,7 +11,7 @@ The generated tree is of the following form:
 
 The class that contains this tree is the next class:
 
-.. autoclass:: sqla_filters.filter.SqlaFilterTree
+.. autoclass:: sqla_filters.tree.SqlaFilterTree
 
 .. note::
     This is from this class you can call the filter function.

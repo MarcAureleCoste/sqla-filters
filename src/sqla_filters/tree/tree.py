@@ -1,10 +1,10 @@
-"""Filter module.
+"""Tree module.
 
 These class are used to represent the filters to apply to a query.
 """
 from sqlalchemy.orm.query import Query
 
-from .nodes import TreeNode
+from sqla_filters.nodes.base import TreeNode
 
 
 class SqlaFilterTree(object):

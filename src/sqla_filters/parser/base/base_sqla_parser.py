@@ -1,4 +1,4 @@
-from sqla_filters.filter import SqlaFilterTree
+from sqla_filters.tree import SqlaFilterTree
 
 
 class BaseSqlaParser(object):

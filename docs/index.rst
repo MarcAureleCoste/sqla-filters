@@ -47,30 +47,6 @@ package.
 Other formats will be supported in the future. You can also create your own parser to generate
 the three from the format you want (:ref:`here <sqla-filters-plugins-cyopp>`).
 
-Basic usage example:
-
-.. code-block:: python
-
-    # Sqlalchemy setup ... + model definition
-
-    # Create a JSON parser instance
-    parser = JSONFiltersParser(raw_json_string)
-
-    # you now have a tree available as a property in the parser
-    print(parser.tree)
-
-    # You can finaly filter your query
-    query = session.query(Post)
-    filtered_query = parser.tree.filter(query)
-
-    # Get the results
-    query.all()
-
-For a more complete example (with Model and JSON) you can see :ref:`parser usage <sqla-filters-parser-usage>`.
-
-You can also join our `Discord`_ to discuss with other users.
-
-
 =====
 Guide
 =====
@@ -81,7 +57,7 @@ User Guide
 .. toctree::
     :maxdepth: 1
 
-    user/parser
+    user/nodes
     user/tree
 
 Developer Guide
@@ -90,7 +66,6 @@ Developer Guide
 .. toctree::
     :maxdepth: 1
 
-    dev/nodes
     dev/plugins
 
 ==================

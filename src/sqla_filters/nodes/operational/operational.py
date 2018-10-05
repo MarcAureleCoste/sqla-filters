@@ -11,13 +11,13 @@ from typing import (
 from sqlalchemy.orm.query import Query
 from sqlalchemy.sql import operators
 
-from .base import BaseOperatorNode
-
+# from .base import BaseOperationalNode
+from sqla_filters.nodes.base import BaseOperationalNode
 
 # #############################################################################
 # ############################## COMPARISON ###################################
 # #############################################################################
-class EqNode(BaseOperatorNode):
+class EqNode(BaseOperationalNode):
     """EqNode class.
     
     This node test the equality between two values.
@@ -44,7 +44,7 @@ class EqNode(BaseOperatorNode):
         )
 
 
-class NotEqNode(BaseOperatorNode):
+class NotEqNode(BaseOperationalNode):
     """NotEqNode class.
     
     This node test the non equality between two values.
@@ -71,7 +71,7 @@ class NotEqNode(BaseOperatorNode):
         )
 
 
-class GtNode(BaseOperatorNode):
+class GtNode(BaseOperationalNode):
     """GtNode class.
     
     This node test if a value is greater than another one.
@@ -98,7 +98,7 @@ class GtNode(BaseOperatorNode):
         )
 
 
-class GteNode(BaseOperatorNode):
+class GteNode(BaseOperationalNode):
     """GteNode class.
     
     This node test if a value is greater or equal to another one.
@@ -126,7 +126,7 @@ class GteNode(BaseOperatorNode):
         )
 
 
-class LtNode(BaseOperatorNode):
+class LtNode(BaseOperationalNode):
     """LtNode class.
     
     This node test if a value is lower than another one.
@@ -153,7 +153,7 @@ class LtNode(BaseOperatorNode):
         )
 
 
-class LteNode(BaseOperatorNode):
+class LteNode(BaseOperationalNode):
     """LteNode class.
     
     This node test if a value is lower or equal to another one.
@@ -183,7 +183,7 @@ class LteNode(BaseOperatorNode):
 # #############################################################################
 # ############################### SEQUENCE ####################################
 # #############################################################################
-class ContainsNode(BaseOperatorNode):
+class ContainsNode(BaseOperationalNode):
     """ContainsNode class.
     
     This node test if an attribut contains the value.
@@ -212,7 +212,7 @@ class ContainsNode(BaseOperatorNode):
 # #############################################################################
 # #############################################################################
 # #############################################################################
-class LikeNode(BaseOperatorNode):
+class LikeNode(BaseOperationalNode):
     """ContainsNode class.
     
     This node test if an attribut is like the value.
@@ -239,7 +239,7 @@ class LikeNode(BaseOperatorNode):
         )
 
 
-class InNode(BaseOperatorNode):
+class InNode(BaseOperationalNode):
     """InNode class.
     
     This node test if an attribut is in a list of values.
@@ -266,7 +266,7 @@ class InNode(BaseOperatorNode):
         )
 
 
-class NotInNode(BaseOperatorNode):
+class NotInNode(BaseOperationalNode):
     """NotInNode class.
     
     This node test if an attribut is not in a list of values.
@@ -293,7 +293,7 @@ class NotInNode(BaseOperatorNode):
         )
 
 
-class NullNode(BaseOperatorNode):
+class NullNode(BaseOperationalNode):
     """NullNode class.
     
     This node test if an attribut is null.
@@ -319,7 +319,7 @@ class NullNode(BaseOperatorNode):
         )
 
 
-class NotNullNode(BaseOperatorNode):
+class NotNullNode(BaseOperationalNode):
     """NotNullNode class.
     
     This node test if an attribut is not null.
