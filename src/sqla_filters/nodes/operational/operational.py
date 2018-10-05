@@ -11,13 +11,12 @@ from typing import (
 from sqlalchemy.orm.query import Query
 from sqlalchemy.sql import operators
 
-from .base import BaseOperatorNode
-
+from sqla_filters.nodes.base import BaseOperationalNode
 
 # #############################################################################
 # ############################## COMPARISON ###################################
 # #############################################################################
-class EqNode(BaseOperatorNode):
+class EqNode(BaseOperationalNode):
     """EqNode class.
     
     This node test the equality between two values.
@@ -27,7 +26,6 @@ class EqNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(EqNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.eq
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -35,7 +33,7 @@ class EqNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) == self._value
             )
 
     def __str__(self) -> str:
@@ -45,7 +43,7 @@ class EqNode(BaseOperatorNode):
         )
 
 
-class NotEqNode(BaseOperatorNode):
+class NotEqNode(BaseOperationalNode):
     """NotEqNode class.
     
     This node test the non equality between two values.
@@ -55,7 +53,6 @@ class NotEqNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(NotEqNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.ne
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -63,7 +60,7 @@ class NotEqNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) != self._value
             )
 
     def __str__(self) -> str:
@@ -73,7 +70,7 @@ class NotEqNode(BaseOperatorNode):
         )
 
 
-class GtNode(BaseOperatorNode):
+class GtNode(BaseOperationalNode):
     """GtNode class.
     
     This node test if a value is greater than another one.
@@ -83,7 +80,6 @@ class GtNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(GtNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.gt
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -91,7 +87,7 @@ class GtNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) > self._value
             )
 
     def __str__(self) -> str:
@@ -101,7 +97,7 @@ class GtNode(BaseOperatorNode):
         )
 
 
-class GteNode(BaseOperatorNode):
+class GteNode(BaseOperationalNode):
     """GteNode class.
     
     This node test if a value is greater or equal to another one.
@@ -119,7 +115,7 @@ class GteNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) >= self._value
             )
 
     def __str__(self) -> str:
@@ -129,7 +125,7 @@ class GteNode(BaseOperatorNode):
         )
 
 
-class LtNode(BaseOperatorNode):
+class LtNode(BaseOperationalNode):
     """LtNode class.
     
     This node test if a value is lower than another one.
@@ -139,7 +135,6 @@ class LtNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(LtNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.lt
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -147,7 +142,7 @@ class LtNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) < self._value
             )
 
     def __str__(self) -> str:
@@ -157,7 +152,7 @@ class LtNode(BaseOperatorNode):
         )
 
 
-class LteNode(BaseOperatorNode):
+class LteNode(BaseOperationalNode):
     """LteNode class.
     
     This node test if a value is lower or equal to another one.
@@ -167,7 +162,6 @@ class LteNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(LteNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.le
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -175,7 +169,7 @@ class LteNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) <= self._value
             )
 
     def __str__(self) -> str:
@@ -188,7 +182,7 @@ class LteNode(BaseOperatorNode):
 # #############################################################################
 # ############################### SEQUENCE ####################################
 # #############################################################################
-class ContainsNode(BaseOperatorNode):
+class ContainsNode(BaseOperationalNode):
     """ContainsNode class.
     
     This node test if an attribut contains the value.
@@ -217,7 +211,7 @@ class ContainsNode(BaseOperatorNode):
 # #############################################################################
 # #############################################################################
 # #############################################################################
-class LikeNode(BaseOperatorNode):
+class LikeNode(BaseOperationalNode):
     """ContainsNode class.
     
     This node test if an attribut is like the value.
@@ -227,7 +221,6 @@ class LikeNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(LikeNode, self).__init__(attribute, value, attr_sep)
-        self._method = lambda field, value: field.like(value)
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -235,7 +228,7 @@ class LikeNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr).like(self._value)
             )
 
     def __str__(self) -> str:
@@ -245,7 +238,7 @@ class LikeNode(BaseOperatorNode):
         )
 
 
-class InNode(BaseOperatorNode):
+class InNode(BaseOperationalNode):
     """InNode class.
     
     This node test if an attribut is in a list of values.
@@ -255,7 +248,6 @@ class InNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(InNode, self).__init__(attribute, value, attr_sep)
-        self._method = lambda field, value: field.in_(value)
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -263,7 +255,7 @@ class InNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr).in_(self._value)
             )
 
     def __str__(self) -> str:
@@ -273,7 +265,7 @@ class InNode(BaseOperatorNode):
         )
 
 
-class NotInNode(BaseOperatorNode):
+class NotInNode(BaseOperationalNode):
     """NotInNode class.
     
     This node test if an attribut is not in a list of values.
@@ -283,7 +275,6 @@ class NotInNode(BaseOperatorNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(NotInNode, self).__init__(attribute, value, attr_sep)
-        self._method = lambda field, value: ~field.in_(value)
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -291,7 +282,7 @@ class NotInNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                ~getattr(related_model, attr).in_(self._value)
             )
 
     def __str__(self) -> str:
@@ -301,16 +292,15 @@ class NotInNode(BaseOperatorNode):
         )
 
 
-class NullNode(BaseOperatorNode):
+class NullNode(BaseOperationalNode):
     """NullNode class.
     
     This node test if an attribut is null.
     This node use lambda function that test if the attr == None.
     """
 
-    def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+    def __init__(self, attribute: str, value: Any = None, attr_sep: str = '.') -> None:
         super(NullNode, self).__init__(attribute, value, attr_sep)
-        self._method = lambda field, value: field == None
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -318,7 +308,7 @@ class NullNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) == None
             )
 
     def __str__(self) -> str:
@@ -328,16 +318,15 @@ class NullNode(BaseOperatorNode):
         )
 
 
-class NotNullNode(BaseOperatorNode):
+class NotNullNode(BaseOperationalNode):
     """NotNullNode class.
     
     This node test if an attribut is not null.
     This node use lambda function that test if the attr != None.
     """
 
-    def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+    def __init__(self, attribute: str, value: Any = None, attr_sep: str = '.') -> None:
         super(NotNullNode, self).__init__(attribute, value, attr_sep)
-        self._method = lambda field, value: field != None
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
@@ -345,7 +334,7 @@ class NotNullNode(BaseOperatorNode):
         if related_model and hasattr(related_model, attr):
             return (
                 self._join_tables(query, join_models),
-                self._method(getattr(related_model, attr), self._value)
+                getattr(related_model, attr) != None
             )
 
     def __str__(self) -> str:

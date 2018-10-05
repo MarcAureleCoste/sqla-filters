@@ -1,13 +1,20 @@
-"""Filter module.
+"""Tree module.
 
 These class are used to represent the filters to apply to a query.
 """
 from sqlalchemy.orm.query import Query
 
-from .nodes import TreeNode
+from sqla_filters.nodes.base import TreeNode
 
 
 class SqlaFilterTree(object):
+    """Class SqlaFilterTree.
+    
+    When you acces the parser.tree an instance of the class is returned.
+    From the class you can access the root element and filter a sqlalchemy
+    query.
+    """
+
     def __init__(self, root: TreeNode) -> None:
         self._root = root
 

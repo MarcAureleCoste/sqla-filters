@@ -1,35 +1,24 @@
-# Introduction 
+# Sqla-filters
 
-Filter sqlalchemy query with json data.
+![license](https://img.shields.io/pypi/l/sqla-filters.svg)
+![wheel](https://img.shields.io/pypi/wheel/sqla-filters.svg)
+![pyversions](https://img.shields.io/pypi/pyversions/sqla-filters.svg)
 
-This is an early stage version of the project a lot of change is coming.
+## Introduction 
 
-# Installation
+The purpose of this project is to set the basic class so that you can create a tree that will be then used to filter a request made with the SQLAlchemy ORM.
+
+Currently, the elements provided are as Follows:
+- the nodes (see: the table Below)
+- the class SqlaFilterTree which contains the tree and allows to print it.
+- the class BaseSqlaParser which serves as the basis if you create a parser that allows generating a tree.
+
+This project is also for me a way to experience the namespace packages.
+
+## Installation
 
 ```bash
-pip install sqla-filter
-```
-
-# Getting Started
-
-Create an instance of the JSONFilterParser with the json string.
-
-Example:
-```python
-# Sqlalchemy setup ... + model definition
-
-# Create a JSON parser instance
-parser = JSONFiltersParser(raw_json_string)
-
-# you now have a tree available as a property in the parser
-print(parser.tree)
-
-# You can finaly filter your query
-query = session.query(Post)
-filtered_query = parser.tree.filter(query)
-
-# Get the results
-query.all()
+pip install sqla-filters
 ```
 
 ## Operators
@@ -38,7 +27,7 @@ The following operators are or will be implemented:
 
 | support | operators |          name         |        code        |
 |:-------:|:----------|:---------------------:|-------------------:|
-|   [ ]   | like      | like                  | like()             |
+|   [x]   | like      | like                  | like()             |
 |   [x]   | eq        | equal                 | operators.eq       |
 |   [x]   | not_eq    | not equal             | operators.ne       |
 |   [x]   | null      | null                  | is None            |
@@ -49,52 +38,12 @@ The following operators are or will be implemented:
 |   [x]   | lte       | lower than or equal   | operators.le       |
 |   [x]   | in        | in                    | in_()              |
 |   [x]   | not_in    | not in                | ~.in_()            |
-|   [ ]   | contains  | contains              | operators.contains |
+|   [x]   | contains  | contains              | operators.contains |
 
-## Formats
 
-### JSON
+## Tree
 
-```json
-{
-    "type": "and",
-    "data": [
-        {
-            "type": "or",
-            "data": [
-                {
-                    "type": "operator",
-                    "data": {
-                        "attribute": "name",
-                        "operator": "eq",
-                        "value": "toto"
-                    }
-                },
-                {
-                    "type": "operator",
-                    "data":{
-                        "attribute": "name",
-                        "operator": "eq",
-                        "value": "tata"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "operator",
-            "data": {
-                "attribute": "age",
-                "operator": "eq",
-                "value": 21
-            }
-        }
-    ]
-}
-```
-
-/!\ Json format can change in the futur. /!\
-
-### Tree result
+This is an example of what a tree looks like.
 
 ```
                                       +----------------------+
@@ -120,8 +69,31 @@ The following operators are or will be implemented:
 +----------------------+                +----------------------+
 ```
 
-# Contribute
+## Contribute
+
+You can contribute to the project using different ways.
+
+### 1 | Classical
 
 Fork the repository and run the following command to install the dependencies and the dev dependencies.
 
 `pip install -e '.[dev]'`
+
+Pipenv `Pipefile` is also available if needed.
+
+### 2 | Using namespace features
+
+If you want to contribute using the namespace features it's really simple.
+First create your own project and use the following directories structure.
+
+    ProjectFolder
+        |______src
+                |______sqla_filters
+                            |______parser
+
+This is an example to create new parser.
+
+You can find example with the following repositories:
+
+- [sqla-filters-json](https://github.com/MarcAureleCoste/sqla-filters-json)
+- [sqla-filters-yaml](https://github.com/MarcAureleCoste/sqla-filters-yaml)

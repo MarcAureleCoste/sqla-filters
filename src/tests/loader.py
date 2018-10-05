@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 
 from .models import (
     Simple,
@@ -44,10 +45,12 @@ def _load_post(session, data):
     post_list = data['post']
     author_list = session.query(Author).all()
     for index, post in enumerate(post_list):
+        date = datetime.datetime.strptime(post['pub_date'], '%d-%m-%Y')
         post_instance = Post(
             title=post['title'],
             content=post['content'],
-            pages=int(post['pages'])
+            pages=int(post['pages']),
+            pub_date=date
         )
         session.add(post_instance)
         author_list[index%3].posts.append(post_instance)

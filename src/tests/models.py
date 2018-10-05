@@ -20,6 +20,7 @@ class Post(Base):
     title = sa.Column(sa.String(100))
     content = sa.Column(sa.String)
     pages = sa.Column(sa.Integer)
+    pub_date = sa.Column(sa.DateTime)
     author_id = sa.Column(sa.Integer, sa.ForeignKey('author.a_id'))
     author = relationship('Author', back_populates='posts')
 
