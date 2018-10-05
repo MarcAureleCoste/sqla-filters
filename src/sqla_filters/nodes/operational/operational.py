@@ -300,7 +300,7 @@ class NullNode(BaseOperationalNode):
     This node use lambda function that test if the attr == None.
     """
 
-    def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+    def __init__(self, attribute: str, value: Any = None, attr_sep: str = '.') -> None:
         super(NullNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -326,7 +326,7 @@ class NotNullNode(BaseOperationalNode):
     This node use lambda function that test if the attr != None.
     """
 
-    def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+    def __init__(self, attribute: str, value: Any = None, attr_sep: str = '.') -> None:
         super(NotNullNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
