@@ -8,8 +8,8 @@ from setuptools import (
 )
 
 NAME: str = 'sqla-filters'
-VERSION: str = '0.0.1'
-DESCRIPTION: str = 'Library to help developer to create filter for the sqlachemy orm.'
+VERSION: str = '0.0.2'
+DESCRIPTION: str = 'Library to help developers to create filter for the sqlachemy orm.'
 
 def get_requirements() -> List[str]:
     """Return the requirements as a list of string."""
@@ -23,10 +23,6 @@ def read(file_path: str):
     """Simply return the content of a file."""
     with open(file_path) as f:
         return f.read()
-
-# REQUIRE: List[str] = [
-#     'sqlalchemy'
-# ]
 
 REQUIRE: List[str] = get_requirements()
 
@@ -66,13 +62,13 @@ setup(
     ],
 
     install_requires=REQUIRE,
-    # packages=find_packages('src'),
     packages=(
         'sqla_filters',
-        'sqla_filters.filter',
-        'sqla_filters.filter.nodes',
+        'sqla_filters.tree',
+        'sqla_filters.nodes.base',
+        'sqla_filters.nodes.logical',
+        'sqla_filters.nodes.operational',
         'sqla_filters.parser.base',
-        'sqla_filters.parser.json'
     ),
     package_dir={'': 'src'},
 

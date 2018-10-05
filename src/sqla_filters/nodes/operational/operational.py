@@ -11,7 +11,6 @@ from typing import (
 from sqlalchemy.orm.query import Query
 from sqlalchemy.sql import operators
 
-# from .base import BaseOperationalNode
 from sqla_filters.nodes.base import BaseOperationalNode
 
 # #############################################################################

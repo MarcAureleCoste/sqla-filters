@@ -18,7 +18,7 @@ This project is also for me a way to experience the namespace packages.
 ## Installation
 
 ```bash
-pip install sqla-filter
+pip install sqla-filters
 ```
 
 ## Operators

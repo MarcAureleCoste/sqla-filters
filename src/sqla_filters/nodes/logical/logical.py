@@ -11,7 +11,6 @@ Currently two logical operation are supported:
 from sqlalchemy import and_, or_
 from sqlalchemy.orm.query import Query
 
-# from .base import BaseLogicalNode
 from sqla_filters.nodes.base import BaseLogicalNode
 
 class AndNode(BaseLogicalNode):
