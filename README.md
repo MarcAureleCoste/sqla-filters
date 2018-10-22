@@ -4,6 +4,7 @@
 ![license](https://img.shields.io/pypi/l/sqla-filters.svg)
 ![wheel](https://img.shields.io/pypi/wheel/sqla-filters.svg)
 ![pyversions](https://img.shields.io/pypi/pyversions/sqla-filters.svg)
+[![Updates](https://pyup.io/repos/github/MarcAureleCoste/sqla-filters/shield.svg)](https://pyup.io/repos/github/MarcAureleCoste/sqla-filters/)
 
 ## Introduction 
 
