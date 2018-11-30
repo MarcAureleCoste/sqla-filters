@@ -107,7 +107,6 @@ class GteNode(BaseOperationalNode):
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
         super(GteNode, self).__init__(attribute, value, attr_sep)
-        self._method = operators.ge
 
     def filter(self, query: Query, entity: type):
         relations, attr = self._extract_relations(self._attribute)
