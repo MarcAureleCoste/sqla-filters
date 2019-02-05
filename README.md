@@ -81,8 +81,6 @@ Fork the repository and run the following command to install the dependencies an
 
 `pip install -e '.[dev]'`
 
-Pipenv `Pipefile` is also available if needed.
-
 ### 2 | Using namespace features
 
 If you want to contribute using the namespace features it's really simple.

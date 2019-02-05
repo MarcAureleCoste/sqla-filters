@@ -21,6 +21,7 @@ class AndNode(BaseLogicalNode):
     """
 
     def __init__(self) -> None:
+        """Initialize self."""
         super(AndNode, self).__init__(method=and_)
 
     def __str__(self) -> str:
@@ -34,6 +35,7 @@ class OrNode(BaseLogicalNode):
     to create the filters list and apply the ``or_`` function to this list."""
 
     def __init__(self) -> None:
+        """Initialize self."""
         super(OrNode, self).__init__(method=or_)
 
     def __str__(self) -> str:

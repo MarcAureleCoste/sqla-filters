@@ -1,3 +1,9 @@
+"""Operational nodes.
+
+The nodes class in this file are the operational nodes.
+Operational nodes are used to apply a comparison between an attribute and a
+value.
+"""
 from typing import (
     Any,
     List,
@@ -25,6 +31,20 @@ class EqNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(EqNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -52,6 +72,20 @@ class NotEqNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(NotEqNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -79,6 +113,20 @@ class GtNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(GtNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -106,6 +154,20 @@ class GteNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(GteNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -133,6 +195,20 @@ class LtNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(LtNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -160,6 +236,20 @@ class LteNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(LteNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -189,6 +279,20 @@ class ContainsNode(BaseOperationalNode):
     `sqlalchemy.sql.operators`."""
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(ContainsNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -219,6 +323,20 @@ class LikeNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(LikeNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -246,6 +364,20 @@ class InNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(InNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -273,6 +405,20 @@ class NotInNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(NotInNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -299,6 +445,20 @@ class NullNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any = None, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(NullNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
@@ -325,6 +485,20 @@ class NotNullNode(BaseOperationalNode):
     """
 
     def __init__(self, attribute: str, value: Any = None, attr_sep: str = '.') -> None:
+        """Initialize self.
+        
+        :param attribute: The model attribute as a string.
+        :type attribute: str
+
+        :param value: The value of the attribute.
+        :type value: Any
+
+        :param attr_sep: The separator if the attribute concerns relations.
+        :type attr_set: str
+
+        :return: None
+        :rtype: None
+        """
         super(NotNullNode, self).__init__(attribute, value, attr_sep)
 
     def filter(self, query: Query, entity: type):
